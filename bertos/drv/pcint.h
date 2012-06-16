@@ -30,7 +30,7 @@
  *
  * -->
  *
- * \defgroup pcint_driver Pin change interrupt driver
+ * \defgroup pcint Pin change interrupt driver
  * \ingroup drivers
  * \{
  * \brief Pin change interrupt driver for Atmega controllers.
@@ -109,5 +109,4 @@ INLINE void pcint_stop(struct Pcint *ctx)
 	pcint_hw_setmask(ctx->unit, 0);
 }
 
-/** \} */ //defgroup pcint_driver
 #endif /* DRV_PCINT_H */
