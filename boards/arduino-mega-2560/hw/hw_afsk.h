@@ -32,6 +32,7 @@
  *
  * \brief AFSK modem hardware-specific definitions.
  *
+ * \version $Id: hw_afsk.h 4136 2010-08-04 09:33:23Z asterix $
  *
  * \author Francesco Sacchi <batt@develer.com>
  */
@@ -40,7 +41,6 @@
 #define HW_AFSK_H
 
 #include "cfg/cfg_arch.h"
-#include <cfg/cfg_afsk.h>
 
 #include <avr/io.h>
 
@@ -94,31 +94,18 @@ void hw_afsk_dacInit(int ch, struct Afsk *_ctx);
  * \param ctx AFSK context (\see Afsk).  This parameter must be saved and
  *             passed back to afsk_dac_isr() for every convertion.
  */
-#if CONFIG_AFSK_PWM_TX == 1
-// If using a PWM output then use mode 3 fast (asymmetric) mode running as fast as possible
-// on port B bit 4 (Arduino-Mega D10). 
-// Note, the Mega moves PTT from the original port B bit 3 (Arduino D11) to bit 6 (Mega D12)
-#define AFSK_DAC_INIT(ch, ctx)\
-	do { \
-		(void)ch, (void)ctx;\
-			TCCR2A = BV(COM2A1) | BV(COM2A0) | BV(WGM21) | BV(WGM20);\
-			TCCR2B = BV(CS20);\
-			DDRB |= BV(6);\
-			DDRB |= BV(4);\
-		} while (0)
-#else
-#define AFSK_DAC_INIT(ch, ctx)   do { (void)ch, (void)ctx; DDRD |= 0x0F; DDRB |= BV(6); } while (0)
-#endif
+#define AFSK_DAC_INIT(ch, ctx)   do { (void)ch, (void)ctx; DDRD |= 0xF0; DDRB |= BV(3); } while (0)
 
 /**
  * Start DAC convertions on channel \a ch.
  * \param ch DAC channel.
  */
-#define AFSK_DAC_IRQ_START(ch)   do { (void)ch; extern bool hw_afsk_dac_isr; PORTB |= BV(6); hw_afsk_dac_isr = true; } while (0)
+#define AFSK_DAC_IRQ_START(ch)   do { (void)ch; extern bool hw_afsk_dac_isr; PORTB |= BV(3); hw_afsk_dac_isr = true; } while (0)
+
 /**
  * Stop DAC convertions on channel \a ch.
  * \param ch DAC channel.
  */
-#define AFSK_DAC_IRQ_STOP(ch)    do { (void)ch; extern bool hw_afsk_dac_isr; PORTB &= ~BV(6); hw_afsk_dac_isr = false; } while (0)
+#define AFSK_DAC_IRQ_STOP(ch)    do { (void)ch; extern bool hw_afsk_dac_isr; PORTB &= ~BV(3); hw_afsk_dac_isr = false; } while (0)
 
 #endif /* HW_AFSK_H */
