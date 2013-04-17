@@ -73,13 +73,13 @@
 
 /**
  * \name Connection of the leds to the DSP:
- * <pre>
+ * \code
  *   Led       Line    DSP Pin
  *   ---------------------------
  *   YELLOW    T2      HOME1/TB3
  *   GREEN     T3      INDX1/TB2
  *   RED       T4      PHB1/TB1
- * </pre>
+ * \endcode
  */
 
 INLINE bool bld_is_inverted_intensity(enum BLD_DEVICE device)
@@ -146,8 +146,8 @@ INLINE void bld_hw_set(enum BLD_DEVICE device, bool enable)
 		struct REG_TIMER_STRUCT* timer = bld_get_timer(device);
 
 		// Check that the timer is currently stopped, and the OFLAG is not
-		//  controlled by another timer. Otherwise, the led is already 
-		//  controlled by the timer, and we cannot correctly set it 
+		//  controlled by another timer. Otherwise, the led is already
+		//  controlled by the timer, and we cannot correctly set it
 		//  on/off without reprogramming the timer.
 		ASSERT((timer->CTRL & REG_TIMER_CTRL_MODE_MASK) == REG_TIMER_CTRL_MODE_STOP);
 		ASSERT(!(timer->SCR & REG_TIMER_SCR_EEOF));

@@ -16,26 +16,26 @@
  *
  * The formula used by the ramp is the following:
  *
- * <pre>
+ * \code
  *            a * b
  * f(t) = -------------
  *         lerp(a,b,t)
- * </pre>
+ * \endcode
  *
  * Where <code>a</code> and <code>b</code> are the maximum and minimum speed
  * respectively (minimum and maximum wavelength respectively), and <code>lerp</code>
  * is a linear interpolation with a factor:
  *
- * <pre>
+ * \code
  * lerp(a,b,t) =  a + t * (b - a)  =  (a * (1 - t)) + (b * t)
- * </pre>
+ * \endcode
  *
  * <code>t</code> must be in the [0,1] interval. It is easy to see that the
  * following holds true:
  *
- * <pre>
+ * \code
  * f(0) = b,   f(1) = a
- * </pre>
+ * \endcode
  *
  * And that the function is monotonic. So, the function effectively interpolates
  * between the maximum and minimum speed through its domain ([0,1] -> [b,a]).
@@ -48,11 +48,11 @@
  * ramp, which is a setup parameter for the ramp). This is done to reduce the
  * number of operations per step. The formula looks like this:
  *
- * <pre>
+ * \code
  *               a * b * MT
  * g(t) = ----------------------------
  *           (a * MT) + t * (b - a)
- * </pre>
+ * \endcode
  *
  * It can be shown that this <code>g(t) = f(t * MT)</code>. The denominator
  * is a linear interpolation in the range [b*MT, a*MT], as t moves in the
@@ -60,7 +60,7 @@
  * [b, a]. The implementation caches the value of the numerator and parts
  * of the denominator, so that the formula becomes:
  *
- * <pre>
+ * \code
  * alpha = a * b * MT
  * beta = a * MT
  * gamma = b - a
@@ -68,7 +68,7 @@
  *                alpha
  * g(t) = ----------------------
  *           beta + t * gamma
- * </pre>
+ * \endcode
  *
  * and <code>t</code> is exactly the parameter that ramp_evaluate() gets,
  * that is the current time (in range [0, MT]). The operations performed
@@ -77,13 +77,13 @@
  * The fixed point version of the formula instead transforms the original
  * function as follows:
  *
- * <pre>
+ * \code
  *                   a * b                         a
  *  f(t) =  -------------------------  =  --------------------
  *                 a                         a
  *           b * ( - * (1 - t) + t )         - * (1 - t) + t
  *                 b                         b
- * </pre>
+ * \endcode
  *
  * <code>t</code> must be computed by dividing the current time (24 bit integer)
  * by the maximum time (24 bit integer). This is done by precomputing the

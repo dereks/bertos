@@ -94,9 +94,9 @@ static void init_testBuf(void)
  * \note Restore file position at exit (if no error)
  * \note Test buffer \a buf must be filled with
  * the following statement:
- * <pre>
+ * \code
  * buf[i] = i & 0xff
- * </pre>
+ * \endcode
  */
 static bool kfile_rwTest(KFile *f, uint8_t *buf, size_t size)
 {

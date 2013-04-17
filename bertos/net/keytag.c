@@ -39,11 +39,11 @@
  * and convert the tag value into string.
  *
  * TAG protocol is decribed in this way:
- * <pre>
+ * \code
  * ---------------------------------------------------
  * |STX (0x02)|data...(10 HEX chars)|CR|LF|ETX (0x03)|
  * ---------------------------------------------------
- * </pre>
+ * \endcode
  */
 
 #include "keytag.h"

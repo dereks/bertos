@@ -39,13 +39,13 @@
  * callback function to call.
  *
  * The received payload format is as follows:
- * <pre>
+ * \code
  * +----------------------------------------+
  * |  CMD |            DATA                 |
  * +----------------------------------------+
  * |      |                                 |
  * +  2B  +           0..N Byte             +
- * </pre>
+ * \endcode
  *
  * The CMD ID used is the same supplied by the master when
  * the command was sent.

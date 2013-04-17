@@ -40,7 +40,7 @@
  * what is the exact disposition of the components, as handled by this
  * library:
  *
- *<pre>
+ *\code
  *                 o Vref
  *                 |
  *                 |                               o Vref
@@ -62,26 +62,26 @@
  *     |           |
  *   -----       -----
  *    ---         ---
- *</pre>
+ *\endcode
  * Amp is an amplifier that amplify of AMP times the signal.
  * If we indicate Rp as the parallel of NTC with Rpar, ADCBITS as the bits of the ad converter
  * and ADCVAL as the result from the adc convertion (Not Vadc but just the value read
  * from the adc register), after various calculation, the expression of Rp is:
  *
- *<pre>
+ *\code
  *
  *            ADCVAL * Rser
  * Rp = ------------------------
  *         ADCBITS
  *	2         * AMP - ADCVAL
- *</pre>
+ *\endcode
  *
  * And after that NTC obvisiously is:
- *<pre>
+ *\code
  *        Rpar * Rp
  * NTC = ----------
  *        Rpar - Rp
- *</pre>
+ *\endcode
  *
  *
  * The function ntc_hw_read() compute the resistence using these formulas above.

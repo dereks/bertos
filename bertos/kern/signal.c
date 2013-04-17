@@ -72,21 +72,21 @@
  * signal and immediately dispatched for execution via a direct context switch,
  * if its priority is greater than the running process.
  *
- * <pre>
+ * \code
  * - Synchronous-signal delivery:
  *
  *     [P1]____sig_send()____proc_wakeup()____[P2]
- * </pre>
+ * \endcode
  *
  * In the asynchronous case, the process is scheduled for execution as a
  * consequence of the delivery, but it will be dispatched by the scheduler as
  * usual, according to the scheduling policy.
  *
- * <pre>
+ * \code
  * - Asynchronous-signal delivery:
  *
  *     [P1]____sig_post()____[P1]____proc_schedule()____[P2]
- * </pre>
+ * \endcode
  *
  * In this way, any execution context, including an interrupt handler, can
  * deliver a signal to a process. However, synchronous signal delivery from a

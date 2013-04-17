@@ -34,13 +34,13 @@
  * pocketBus protocol is a simple strictly master-slave protocol, usable
  * in embedded systems.
  * pocketBus frame is as follows:
- * <pre>
+ * \code
  * +----------------------------------------+
  * | STX | VER | ADDR | PAYLOAD | CKS | ETX |
  * +----------------------------------------+
  * |     |     |      |         |     |     |
  * + 1B  + 1B  +  2B  + N Byte  + 2B  + 1B  +
- * </pre>
+ * \endcode
  *
  * - STX, 1 byte (0x02), packet start
  * - VER, 1 byte, packet version

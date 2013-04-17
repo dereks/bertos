@@ -13,7 +13,7 @@
  * accelerating, and returns the time to wait before sending the next step. A pseudo
  * usage pattern is as follows:
  *
- * <pre>
+ * \code
  *  float time = 0;
  *  while (1)
  *  {
@@ -22,7 +22,7 @@
  *      do_motor_step();
  *      time += delta;
  *  }
- * </pre>
+ * \endcode
  *
  * A similar pattern can be used to decelerate (it is sufficient to move the total
  * time backward, such as "time -= delta").
