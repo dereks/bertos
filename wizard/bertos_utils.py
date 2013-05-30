@@ -624,7 +624,9 @@ def sub(string, parameter, value):
     """
     Substitute the given value at the given parameter define in the given string
     """
-    return re.sub(r"(?P<define>#define\s+" + parameter + r"\s+)([^\s]+)", r"\g<define>" + value, string)
+    # Keep "#define[\s+]parameter[\s+]" as <define>, but replace everything
+    # else up til \n with 'value'.  (The newline can't be preceded by '\'.)
+    return re.sub(r"(?P<define>#define\s+" + parameter + r"\s+)(?<!\\)([^\n]+)", r"\g<define>" + value, string)
 
 def isInt(informations):
     """
