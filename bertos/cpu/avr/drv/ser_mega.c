@@ -462,7 +462,8 @@ struct AvrSerial
 
 static uint16_t uart_period(unsigned long bps)
 {
-	uint16_t period = DIV_ROUND(CPU_FREQ / 16UL, bps) - 1;
+	uint16_t period = DIV_ROUND(CPU_FREQ / 8UL, bps) - 1;
+	UCSR0A = BV(U2X0); /* The Arduino Uno bootloader turns on U2X0 */
 
 	#ifdef _DEBUG
 		long skew = bps - ((CPU_FREQ / 16UL) / (long)(period + 1));
